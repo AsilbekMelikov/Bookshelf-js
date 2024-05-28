@@ -14,6 +14,7 @@ import StatusRadioButtons from "./StatusRadioButtons";
 const BookCard = ({ bookInfo, book }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showStatusRadioModal, setShowStatusRadioModal] = useState(false);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
 
   const changeStatusIntoString = (status) => {
     switch (status) {
@@ -28,6 +29,8 @@ const BookCard = ({ bookInfo, book }) => {
     }
   };
 
+  console.log(bookInfo);
+
   return (
     <Grid item xs={4}>
       <Card
@@ -36,7 +39,7 @@ const BookCard = ({ bookInfo, book }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "510px",
+          minHeight: "520px",
         }}
       >
         <Box sx={{ position: "relative", alignSelf: "end" }}>
@@ -98,6 +101,18 @@ const BookCard = ({ bookInfo, book }) => {
           <Typography variant="body2" color="text.secondary">
             Status: {changeStatusIntoString(book?.status)}
           </Typography>
+          {showMoreInfo ? (
+            <>
+              <Typography variant="body2" color="text.secondary">
+                Published: {bookInfo?.published}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Pages: {bookInfo?.pages}
+              </Typography>
+            </>
+          ) : (
+            ""
+          )}
         </CardContent>
         <CardActions sx={{ padding: "8px 16px 16px" }}>
           <Button
@@ -111,8 +126,9 @@ const BookCard = ({ bookInfo, book }) => {
                 opacity: 0.8,
               },
             }}
+            onClick={() => setShowMoreInfo(!showMoreInfo)}
           >
-            See More
+            {showMoreInfo ? "See less" : "See More"}
           </Button>
         </CardActions>
       </Card>
