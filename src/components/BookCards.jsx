@@ -1,11 +1,9 @@
 import React from "react";
 import { Grid, LinearProgress } from "@mui/material";
-import { useGetBooksQuery } from "../features/authApiSlice";
+
 import BookCard from "./BookCard";
 
-const BookCards = () => {
-  const { data: books, isLoading } = useGetBooksQuery();
-
+const BookCards = ({ books, isLoading }) => {
   return isLoading ? (
     <LinearProgress
       variant="indeterminate"

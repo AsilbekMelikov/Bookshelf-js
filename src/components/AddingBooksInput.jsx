@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { useAddBookMutation } from "../features/authApiSlice";
 
-const AddingBooksInput = () => {
+const AddingBooksInput = ({ refetch }) => {
   const [addingBookInput, setAddingBookInput] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
@@ -17,8 +17,8 @@ const AddingBooksInput = () => {
 
   const handleAddBook = async () => {
     try {
-      const addBookInfo = await addBook(addingBookInput).unwrap();
-      console.log(addBookInfo);
+      await addBook(addingBookInput).unwrap();
+      refetch();
       setAddingBookInput("");
       setErrMessage("");
     } catch (error) {
