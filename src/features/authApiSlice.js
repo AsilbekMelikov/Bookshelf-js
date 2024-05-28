@@ -1,7 +1,5 @@
-// import { apiSlice } from "../app/api/apiSlice";
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { cryptoSign } from "../createSign";
+import { cryptoSign } from "../utils/createSign";
 
 const key = localStorage.getItem("Key");
 
@@ -16,6 +14,18 @@ export const authApiSlice = createApi({
         method: "POST",
         body: { ...credentials },
       }),
+    }),
+
+    getLoginData: build.query({
+      query: () => {
+        return {
+          url: "/myself",
+          headers: {
+            Key: key,
+            Sign: cryptoSign("GET", "/myself"),
+          },
+        };
+      },
     }),
 
     // GET THE BOOKS GLOBALLY BY SEARCHING THE TITLE
@@ -120,6 +130,7 @@ export const authApiSlice = createApi({
 
 export const {
   useLoginMutation,
+  useGetLoginDataQuery,
   useGetBooksQuery,
   useSearchBooksQuery,
   useLazySearchBooksQuery,
