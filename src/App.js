@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./pages/Login";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Books from "./pages/Books";
+import HomePage from "./pages/HomePage";
+import Sidebar from "./pages/Sidebar";
+import { Container } from "@mui/material";
+import UserAccount from "./pages/UserAccount";
 
-function App() {
+const App = () => {
+  const pathname = useLocation().pathname;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {pathname === "/signup" ? "" : <Sidebar />}
+      <main className={`${pathname === "/signup" ? "" : "main-body"}`}>
+        <Container>
+          <Routes>
+            <Route path="/" element={<Navigate to={"/signup"} replace />} />
+            <Route index path="/signup" element={<Login />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/bookshelf" element={<Books />} />
+            <Route path="/account" element={<UserAccount />} />
+          </Routes>
+        </Container>
+      </main>
+    </>
   );
-}
+};
 
 export default App;
