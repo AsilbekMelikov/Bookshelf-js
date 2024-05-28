@@ -29,8 +29,6 @@ const BookCard = ({ bookInfo, book }) => {
     }
   };
 
-  console.log(bookInfo);
-
   return (
     <Grid item xs={4}>
       <Card
