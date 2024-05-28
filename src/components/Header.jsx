@@ -14,10 +14,7 @@ import {
 } from "@mui/material";
 import logo from "../assets/icons/Logo 1.svg";
 import MuiAppBar from "@mui/material/AppBar";
-import {
-  useLazySearchBooksQuery,
-  useSearchBooksQuery,
-} from "../features/authApiSlice";
+import { useLazySearchBooksQuery } from "../features/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchBooks, setSearchLoading } from "../features/authSlice";
 import { useLocation } from "react-router-dom";
@@ -25,7 +22,6 @@ import { useLocation } from "react-router-dom";
 const Header = ({ open, handleDrawerOpen }) => {
   const SEARCH_REGEX = /^[a-zA-Z ][a-zA-Z0-9-_ ]{2,40}$/;
   const [searchInput, setSearchInput] = useState("");
-  // const [searchInfo, setSearchInfo] = useState();
   const [errMessage, setErrMessage] = useState("");
   const [validSearch, setValidSearch] = useState(false);
   const dispatch = useDispatch();
@@ -35,8 +31,7 @@ const Header = ({ open, handleDrawerOpen }) => {
 
   const pathname = useLocation().pathname;
 
-  // console.log(errMessage);
-  console.log(isFetching);
+  console.log(errMessage);
 
   useEffect(() => {
     if (!searchBooks) {

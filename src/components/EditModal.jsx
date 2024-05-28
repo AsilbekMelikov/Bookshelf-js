@@ -8,7 +8,7 @@ const EditModal = (props) => {
   const { bookId, showEditModal, setShowStatusRadioModal, setShowEditModal } =
     props;
 
-  const [deleteBook, { isLoading }] = useDeleteBookMutation();
+  const [deleteBook] = useDeleteBookMutation();
 
   const handleDeleteBook = async () => {
     try {

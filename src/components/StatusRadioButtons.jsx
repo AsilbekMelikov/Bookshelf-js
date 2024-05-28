@@ -14,7 +14,7 @@ const StatusRadioButtons = ({
 }) => {
   const [radioValue, setRadioValue] = useState("new");
 
-  const [updateStatus, { isLoading: isUpdating }] = useUpdateBookMutation();
+  const [updateStatus] = useUpdateBookMutation();
 
   const changeStatusIntoNumbers = (status) => {
     switch (status) {
