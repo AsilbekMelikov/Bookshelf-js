@@ -11,7 +11,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../features/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/authSlice";
