@@ -11,7 +11,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../features/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/authSlice";
@@ -93,12 +93,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    localStorage.setItem("Key", inputValues.key);
+    localStorage.setItem("Secret", inputValues.secret);
     try {
       const userData = await login(inputValues).unwrap();
       dispatch(setCredentials(userData?.data));
-      localStorage.setItem("Key", userData?.data.key);
-      localStorage.setItem("Secret", userData?.data.secret);
+
       navigate("/home");
     } catch (error) {
       console.log(error);

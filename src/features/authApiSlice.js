@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { cryptoSign } from "../utils/createSign";
 
-const key = localStorage.getItem("Key");
-
 export const authApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://no23.lavina.tech" }),
   tagTypes: ["Book"],
@@ -18,6 +16,7 @@ export const authApiSlice = createApi({
 
     getLoginData: build.query({
       query: () => {
+        const key = localStorage.getItem("Key");
         return {
           url: "/myself",
           headers: {
@@ -31,6 +30,7 @@ export const authApiSlice = createApi({
     // GET THE BOOKS GLOBALLY BY SEARCHING THE TITLE
     searchBooks: build.query({
       query: (title) => {
+        const key = localStorage.getItem("Key");
         return {
           url: `/books/${title}`,
           headers: {
@@ -48,6 +48,7 @@ export const authApiSlice = createApi({
     // GET BOOKS FROM BOOK SHELF
     getBooks: build.query({
       query: () => {
+        const key = localStorage.getItem("Key");
         return {
           url: "/books",
           headers: {
@@ -68,6 +69,7 @@ export const authApiSlice = createApi({
     // ADD BOOK TO THE SHELF
     addBook: build.mutation({
       query: (bookNumber) => {
+        const key = localStorage.getItem("Key");
         return {
           url: "/books",
           method: "POST",
@@ -82,12 +84,13 @@ export const authApiSlice = createApi({
           body: { isbn: bookNumber },
         };
       },
-      invalidatesTags: [{ type: "Book", id: "LIST" }],
+      invalidatesTags: ["Book"],
     }),
 
     // UPDATE BOOK STATUS
     updateBook: build.mutation({
       query: ({ id, status }) => {
+        const key = localStorage.getItem("Key");
         return {
           url: `/books/${id}`,
           method: "PATCH",
@@ -111,6 +114,7 @@ export const authApiSlice = createApi({
     // DELETE BOOK
     deleteBook: build.mutation({
       query: (id) => {
+        const key = localStorage.getItem("Key");
         return {
           url: `/books/${id}`,
           method: "DELETE",
