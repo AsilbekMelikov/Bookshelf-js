@@ -34,6 +34,13 @@ const Header = ({ open, handleDrawerOpen }) => {
   console.log(errMessage);
 
   useEffect(() => {
+    triggerSearch("hello");
+    dispatch(setSearchBooks(searchBooks?.data));
+
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (!searchBooks) {
       setErrMessage("No data in existence");
     }
