@@ -3,21 +3,17 @@ import { ThemeProvider } from "@emotion/react";
 import {
   Box,
   Button,
-  Checkbox,
   CircularProgress,
   Container,
   CssBaseline,
-  FormControlLabel,
-  Grid,
   ImageListItem,
-  Link,
   TextField,
   Typography,
   createTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../features/authApiSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/authSlice";
 import logo from "../assets/icons/Logo 1.svg";
 
@@ -25,43 +21,81 @@ const Login = () => {
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9_]{3,20}$/;
 
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [key, setKey] = useState("");
-  const [secret, setSecret] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [validEmail, setValidEmail] = useState(false);
+  // LOGIN INITIAL VALUES
+  const initialLoginValues = {
+    email: "",
+    name: "",
+    key: "",
+    secret: "",
+  };
+
+  // INPUT VALUES VALIDATION INITIAL VALUES
+  const validationBooleans = {
+    validName: false,
+    validEmail: false,
+    validKey: false,
+    validSecret: false,
+  };
+
+  const [inputValues, setInputValues] = useState(initialLoginValues);
+  const [validInputs, setValidInputs] = useState(validationBooleans);
   const [errMessage, setErrMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
+  // EMAIL VALIDATION
   useEffect(() => {
-    const result = EMAIL_REGEX.test(email);
-    setValidEmail(result);
+    const result = EMAIL_REGEX.test(inputValues.email);
+    setValidInputs((prevState) => ({ ...prevState, validEmail: result }));
 
     // eslint-disable-next-line
-  }, [email]);
+  }, [inputValues.email]);
 
+  // NAME VALIDATION
   useEffect(() => {
-    const result = NAME_REGEX.test(name);
-    setValidName(result);
+    const result = NAME_REGEX.test(inputValues.name);
+    setValidInputs((prevState) => ({ ...prevState, validName: result }));
 
     // eslint-disable-next-line
-  }, [name]);
+  }, [inputValues.name]);
+
+  // KEY VALIDATION
+  useEffect(() => {
+    if (inputValues.key.length > 2) {
+      setValidInputs((prevState) => ({ ...prevState, validKey: true }));
+    } else {
+      setValidInputs((prevState) => ({ ...prevState, validKey: false }));
+    }
+
+    // eslint-disable-next-line
+  }, [inputValues.key]);
+
+  // SECRET VALIDATION
+  useEffect(() => {
+    if (inputValues.secret.length > 2) {
+      setValidInputs((prevState) => ({ ...prevState, validSecret: true }));
+    } else {
+      setValidInputs((prevState) => ({ ...prevState, validSecret: false }));
+    }
+
+    // eslint-disable-next-line
+  }, [inputValues.secret]);
 
   useEffect(() => {
     setErrMessage("");
-  }, [name, email]);
+  }, [inputValues.name, inputValues.email]);
 
-  const navigate = useNavigate();
-
-  const [login, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const userData = await login({ name, email, key, secret }).unwrap();
+      const userData = await login(inputValues).unwrap();
       dispatch(setCredentials(userData?.data));
       localStorage.setItem("Key", userData?.data.key);
       localStorage.setItem("Secret", userData?.data.secret);
@@ -106,7 +140,7 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "10px",
-            maxWidth: "400px",
+            maxWidth: "500px",
             height: "600px",
             padding: "30px",
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
@@ -116,10 +150,10 @@ const Login = () => {
             <img
               src={logo}
               alt={"Book shelf logo"}
-              width={150}
-              height={93}
+              width={140}
+              height={80}
               loading="lazy"
-              style={{ width: "120px", height: "80px" }}
+              style={{ width: "140px", height: "90px" }}
             />
           </ImageListItem>
           <Typography
@@ -131,6 +165,19 @@ const Login = () => {
           </Typography>
 
           <Box component={"form"} onSubmit={handleSubmit}>
+            <Typography
+              id="emailError"
+              variant="span"
+              component={"span"}
+              mb={"20px"}
+              sx={
+                errMessage
+                  ? { display: "inline", color: "red" }
+                  : { display: "none" }
+              }
+            >
+              {errMessage}
+            </Typography>
             <TextField
               size="small"
               label="Enter your email address"
@@ -138,18 +185,20 @@ const Login = () => {
               name="email"
               id="email"
               autoComplete="off"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              aria-invalid={validEmail}
+              value={inputValues.email}
+              onChange={handleChange}
+              aria-invalid={validInputs.validEmail}
               aria-describedby="emailError"
               fullWidth
               autoFocus
               sx={
-                email
+                inputValues.email
                   ? {
+                      marginTop: "20px",
                       marginBottom: 0,
                     }
                   : {
+                      marginTop: "20px",
                       marginBottom: "20px",
                     }
               }
@@ -159,7 +208,7 @@ const Login = () => {
               variant="span"
               component={"span"}
               sx={
-                email && !validEmail
+                inputValues.email && !validInputs.validEmail
                   ? { display: "inline", color: "red" }
                   : { display: "none" }
               }
@@ -173,13 +222,13 @@ const Login = () => {
               name="name"
               id="name"
               autoComplete="off"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              aria-invalid={validName}
+              value={inputValues.name}
+              onChange={handleChange}
+              aria-invalid={validInputs.validName}
               aria-describedby="nameError"
               fullWidth
               sx={
-                name
+                inputValues.name
                   ? {
                       marginTop: "20px",
                       marginBottom: 0,
@@ -195,7 +244,7 @@ const Login = () => {
               variant="span"
               component={"span"}
               sx={
-                name && !validName
+                inputValues.name && !validInputs.validName
                   ? { display: "inline", color: "red" }
                   : { display: "none" }
               }
@@ -210,8 +259,8 @@ const Login = () => {
               id="key"
               autoComplete="off"
               margin="normal"
-              value={key}
-              onChange={(e) => setKey(e.target.value)}
+              value={inputValues.key}
+              onChange={handleChange}
               required
               fullWidth
             />
@@ -223,8 +272,8 @@ const Login = () => {
               id="secret"
               autoComplete="off"
               margin="normal"
-              value={secret}
-              onChange={(e) => setSecret(e.target.value)}
+              value={inputValues.secret}
+              onChange={handleChange}
               required
               fullWidth
             />
@@ -233,13 +282,20 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              disabled={!validEmail || !validName || isLoading}
+              disabled={Object.values(validInputs).includes(false) || isLoading}
               sx={{ mt: 3, mb: 2, color: "white" }}
               size="small"
             >
               {isLoading ? (
                 <>
-                  <CircularProgress />
+                  <CircularProgress
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      marginRight: "10px",
+                      color: "#fa7c54",
+                    }}
+                  />
                   Processing
                 </>
               ) : (
