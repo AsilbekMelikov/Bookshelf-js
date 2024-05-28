@@ -1,8 +1,13 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useAddBookMutation } from "../features/authApiSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { setBooks } from "../features/authSlice";
 
 const AddingBooksInput = () => {
   const [addingBookInput, setAddingBookInput] = useState("");
@@ -59,7 +64,7 @@ const AddingBooksInput = () => {
           <Button
             onClick={handleAddBook}
             sx={{
-              whiteSpace: "nowrap",
+              width: "180px",
               backgroundColor: "#fa7c54",
               color: "#fff",
               paddingX: "10px",
@@ -69,7 +74,21 @@ const AddingBooksInput = () => {
               },
             }}
           >
-            Add book
+            {isLoading ? (
+              <>
+                <CircularProgress
+                  style={{
+                    width: "25px",
+                    height: "25px",
+                    marginRight: "10px",
+                    color: "#fff",
+                  }}
+                />
+                Adding...
+              </>
+            ) : (
+              "Add book"
+            )}
           </Button>
         </Box>
         <Typography
