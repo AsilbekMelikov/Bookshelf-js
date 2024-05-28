@@ -84,7 +84,7 @@ export const authApiSlice = createApi({
           body: { isbn: bookNumber },
         };
       },
-      invalidatesTags: ["Book"],
+      invalidatesTags: [{ type: "Book", id: "LIST" }],
     }),
 
     // UPDATE BOOK STATUS

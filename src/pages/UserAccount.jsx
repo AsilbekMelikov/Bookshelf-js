@@ -170,6 +170,7 @@ const UserAccount = () => {
               {loginData?.data?.secret}
             </Grid>
           </Grid>
+          <Divider />
         </>
       )}
     </Box>
