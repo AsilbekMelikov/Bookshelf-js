@@ -17,7 +17,8 @@ const AddingBooksInput = () => {
 
   const handleAddBook = async () => {
     try {
-      await addBook(addingBookInput).unwrap();
+      const addBookInfo = await addBook(addingBookInput).unwrap();
+      console.log(addBookInfo);
       setAddingBookInput("");
       setErrMessage("");
     } catch (error) {

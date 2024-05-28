@@ -44,9 +44,6 @@ const Header = ({ open, handleDrawerOpen }) => {
     if (!searchBooks) {
       setErrMessage("No data in existence");
     }
-    if (!searchBooks?.isOk) {
-      setErrMessage("There is a problem");
-    }
     dispatch(setSearchBooks(searchBooks?.data));
 
     // eslint-disable-next-line
