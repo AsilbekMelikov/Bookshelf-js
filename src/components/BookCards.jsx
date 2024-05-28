@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { Container, Grid } from "@mui/material";
+import React from "react";
+import { Grid, LinearProgress } from "@mui/material";
 import { useGetBooksQuery } from "../features/authApiSlice";
-import { useDispatch } from "react-redux";
-import { setBooks } from "../features/authSlice";
-import { useSelector } from "react-redux";
 import BookCard from "./BookCard";
 
 const BookCards = () => {
   const { data: books, isLoading } = useGetBooksQuery();
 
-  return (
+  return isLoading ? (
+    <LinearProgress
+      variant="indeterminate"
+      sx={{
+        backgroundColor: "rgb(250, 124, 84, 0.3)",
+        "& .MuiLinearProgress-bar": { backgroundColor: "#fa7c54" },
+      }}
+    />
+  ) : (
     <Grid container spacing={1}>
       {books?.data?.map((book) => {
         const bookInfo = book?.book ?? book?.data;
