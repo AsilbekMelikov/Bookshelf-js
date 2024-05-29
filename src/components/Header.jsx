@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import {
+  Badge,
+  Box,
   Button,
   CircularProgress,
   Container,
@@ -18,6 +19,9 @@ import { useLazySearchBooksQuery } from "../features/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setSearchBooks, setSearchLoading } from "../features/authSlice";
 import { useLocation } from "react-router-dom";
+import { AccountCircle } from "@mui/icons-material";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MailIcon from "@mui/icons-material/Mail";
 
 const Header = ({ open, handleDrawerOpen }) => {
   const SEARCH_REGEX = /^[a-zA-Z ][a-zA-Z0-9-_ ]{2,40}$/;
@@ -134,6 +138,7 @@ const Header = ({ open, handleDrawerOpen }) => {
         paddingY: "10px",
         paddingX: "30px",
         marginBottom: "70px",
+        display: "flex",
       }}
     >
       <Container>
@@ -153,18 +158,21 @@ const Header = ({ open, handleDrawerOpen }) => {
             <MenuIcon />
           </IconButton>
 
-          <ImageListItem>
+          <ImageListItem sx={{ width: { xs: 110, sm: 130 } }}>
             <img
               src={logo}
               alt={"Book shelf logo"}
               width={"110"}
               height={"53"}
               loading="lazy"
-              style={{ width: "130px", marginRight: "50px" }}
+              style={{
+                width: { xs: "100px", sm: "130px" },
+                marginRight: "50px",
+              }}
             />
           </ImageListItem>
           {pathname === "/home" ? (
-            <Search>
+            <Search sx={{ display: { xs: "none", md: "flex" } }}>
               <SearchIconWrapper>
                 <SearchIcon sx={{ color: "#8b96a5" }} />
               </SearchIconWrapper>
@@ -220,8 +228,42 @@ const Header = ({ open, handleDrawerOpen }) => {
           ) : (
             ""
           )}
-
-          <Box sx={{ flexGrow: 1 }} />
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              marginLeft: "auto",
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={4} color="error">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

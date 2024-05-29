@@ -63,6 +63,7 @@ const Footer = () => {
       sx={{
         backgroundColor: "#000",
         width: "100%",
+        overflowX: "hidden",
         position: "relative",
         zIndex: "2000",
       }}
@@ -73,6 +74,9 @@ const Footer = () => {
             padding: "50px",
             paddingRight: 0,
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: { md: "center", lg: "space-between" },
+            alignItems: { xs: "center" },
           }}
         >
           <ImageListItem>
@@ -86,57 +90,64 @@ const Footer = () => {
             />
           </ImageListItem>
 
-          <List
+          <Box
             sx={{
               display: "flex",
-              marginLeft: "auto",
+              alignItems: "center",
+              flexDirection: { xs: "column", sm: "row" },
             }}
           >
-            {footerTextData.map((item, index) => (
-              <ListItemButton
-                key={index}
-                onClick={() => navigate(item.navigationPath)}
-                sx={{ flexGrow: "0", cursor: "default" }}
-              >
-                <ListItemText
-                  sx={
-                    pathname === item.navigationPath
-                      ? {
-                          color: "primary.main",
-                          "& .MuiTypography-root": { cursor: "pointer" },
-                          "&:hover": { color: "primary.main" },
-                        }
-                      : {
-                          color: "#fff",
-
-                          "& .MuiTypography-root": { cursor: "pointer" },
-                          "&:hover": { color: "primary.main" },
-                        }
-                  }
-                  primary={item.text}
-                />
-              </ListItemButton>
-            ))}
-          </List>
-          <List
-            sx={{
-              display: "flex",
-              marginLeft: "auto",
-            }}
-          >
-            {footerIconsData.map((item, index) => (
-              <ListItemIcon key={index} sx={{ flexGrow: "0" }}>
-                <IconButton
-                  href={item.href}
-                  target="_blank"
-                  aria-label={item.ariaLabel}
-                  sx={{ color: "#fff", "&:hover": { color: "primary.main" } }}
+            <List
+              sx={{
+                display: "flex",
+              }}
+            >
+              {footerTextData.map((item, index) => (
+                <ListItemButton
+                  key={index}
+                  onClick={() => navigate(item.navigationPath)}
+                  sx={{ flexGrow: "0", cursor: "default" }}
                 >
-                  {item.icon}
-                </IconButton>
-              </ListItemIcon>
-            ))}
-          </List>
+                  <ListItemText
+                    sx={
+                      pathname === item.navigationPath
+                        ? {
+                            color: "primary.main",
+                            "& .MuiTypography-root": { cursor: "pointer" },
+                            "&:hover": { color: "primary.main" },
+                          }
+                        : {
+                            color: "#fff",
+
+                            "& .MuiTypography-root": { cursor: "pointer" },
+                            "&:hover": { color: "primary.main" },
+                          }
+                    }
+                    primary={item.text}
+                  />
+                </ListItemButton>
+              ))}
+            </List>
+            <Box sx={{ flexGrow: 1 }} />
+            <List
+              sx={{
+                display: "flex",
+              }}
+            >
+              {footerIconsData.map((item, index) => (
+                <ListItemIcon key={index} sx={{ flexGrow: "0" }}>
+                  <IconButton
+                    href={item.href}
+                    target="_blank"
+                    aria-label={item.ariaLabel}
+                    sx={{ color: "#fff", "&:hover": { color: "primary.main" } }}
+                  >
+                    {item.icon}
+                  </IconButton>
+                </ListItemIcon>
+              ))}
+            </List>
+          </Box>
         </Box>
       </Container>
     </Box>

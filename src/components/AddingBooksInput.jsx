@@ -75,6 +75,7 @@ const AddingBooksInput = ({ refetch }) => {
           <Button
             onClick={handleAddBook}
             variant="contained"
+            size="small"
             disabled={!validBookInput || isLoading}
             sx={{
               width: "180px",

@@ -32,14 +32,15 @@ const BookCard = ({ bookInfo, book }) => {
   };
 
   return (
-    <Grid item xs={4}>
+    <Grid item xs={12} sm={6} lg={4}>
       <Card
         sx={{
-          width: 345,
+          maxWidth: 520,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          minHeight: "520px",
+          minHeight: { xs: 450, sm: 520 },
+          boxShadow: "rgba(0, 0, 0, 0.15) 0px 3px 10px 0px",
         }}
       >
         <Box sx={{ position: "relative", alignSelf: "end" }}>

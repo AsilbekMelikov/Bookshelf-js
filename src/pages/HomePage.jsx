@@ -34,7 +34,11 @@ const HomePage = () => {
           page={currentPage}
           onChange={(event, value) => setCurretPage(value)}
           size="large"
-          sx={{ "& .MuiPagination-ul": { justifyContent: "flex-end" } }}
+          sx={{
+            "& .MuiPagination-ul": {
+              justifyContent: { xs: "space-between", sm: "flex-end" },
+            },
+          }}
         />
       </Box>
       <Grid container spacing={3}>

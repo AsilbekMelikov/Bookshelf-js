@@ -68,13 +68,10 @@ const Sidebar = () => {
 
       <Drawer
         sx={{
-          width: drawerWidth,
-
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            // height: "90vh",
             top: "105px",
-            width: drawerWidth,
+            width: { xs: 60, md: 190, xl: drawerWidth },
             boxSizing: "border-box",
           },
         }}
@@ -82,7 +79,7 @@ const Sidebar = () => {
         anchor="left"
         open={open}
       >
-        <DrawerHeader sx={{ left: "240px" }}>
+        <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon color="primary" />
@@ -103,7 +100,11 @@ const Sidebar = () => {
                 color: "#757575",
               }}
             >
-              <ListItemButton>
+              <ListItemButton
+                sx={{
+                  marginBottom: { xs: "20px", md: 0 },
+                }}
+              >
                 <ListItemIcon>
                   {index === 0 && (
                     <HomeIcon
@@ -137,8 +138,14 @@ const Sidebar = () => {
                   primary={text.title}
                   sx={
                     pathname === text.path
-                      ? { color: "primary.main" }
-                      : { color: "" }
+                      ? {
+                          display: { xs: "none", md: "inline-block" },
+                          color: "primary.main",
+                        }
+                      : {
+                          display: { xs: "none", md: "inline-block" },
+                          color: "",
+                        }
                   }
                 />
               </ListItemButton>
