@@ -135,7 +135,7 @@ const UserAccount = () => {
             </Box>
           </Box>
           <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={6} sx={{ paddingY: "25px" }}>
               Name:
             </Grid>
@@ -144,7 +144,7 @@ const UserAccount = () => {
             </Grid>
           </Grid>
           <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={6} sx={{ paddingY: "25px" }}>
               Email:
             </Grid>
@@ -153,7 +153,7 @@ const UserAccount = () => {
             </Grid>
           </Grid>
           <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={6} sx={{ paddingY: "25px" }}>
               Key:
             </Grid>
@@ -162,7 +162,7 @@ const UserAccount = () => {
             </Grid>
           </Grid>
           <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={6} sx={{ paddingY: "25px" }}>
               Secret:
             </Grid>
