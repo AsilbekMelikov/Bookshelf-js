@@ -86,7 +86,7 @@ const Footer = () => {
               width={"110"}
               height={"53"}
               loading="lazy"
-              style={{ width: "130px", marginRight: "50px" }}
+              style={{ width: "110px", marginRight: "50px" }}
             />
           </ImageListItem>
 

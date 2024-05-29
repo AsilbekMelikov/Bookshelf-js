@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -17,6 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DarkMode, { ColorModeContext } from "../components/DarkMode";
 
 const drawerWidth = 240;
 
@@ -48,6 +49,7 @@ const Sidebar = () => {
       path: "/account",
     },
   ];
+  const colorMode = useContext(ColorModeContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -70,7 +72,7 @@ const Sidebar = () => {
         sx={{
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            top: "105px",
+            top: "109px",
             width: { xs: 60, md: 190, xl: drawerWidth },
             boxSizing: "border-box",
           },
@@ -151,6 +153,20 @@ const Sidebar = () => {
               </ListItemButton>
             </Link>
           ))}
+          <ListItemButton
+            sx={{ marginLeft: "0", paddingLeft: "8px", paddingTop: "3px" }}
+            onClick={colorMode.toggleColorMode}
+          >
+            <ListItemIcon sx={{ minWidth: "65px" }}>
+              <DarkMode />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                theme.palette.mode === "dark" ? "Dark mode" : "Light mode"
+              }
+              sx={{ color: "#757575" }}
+            />
+          </ListItemButton>
         </List>
       </Drawer>
     </Box>

@@ -9,7 +9,7 @@ import { useGetBooksQuery } from "../features/authApiSlice";
 const Books = () => {
   const { data: books, isLoading, refetch } = useGetBooksQuery();
   return (
-    <Box sx={{ backgroundColor: "#fff" }}>
+    <Box>
       <AddingBooksInput refetch={refetch} />
       <BookCards books={books} isLoading={isLoading} />
     </Box>

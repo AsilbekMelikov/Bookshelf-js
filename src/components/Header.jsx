@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,6 +22,9 @@ import { useLocation } from "react-router-dom";
 import { AccountCircle } from "@mui/icons-material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MailIcon from "@mui/icons-material/Mail";
+import DarkMode from "./DarkMode";
+import { useTheme } from "@emotion/react";
+import whiteLogo from "../assets/icons/white-logo.png";
 
 const Header = ({ open, handleDrawerOpen }) => {
   const SEARCH_REGEX = /^[a-zA-Z ][a-zA-Z0-9-_ ]{2,40}$/;
@@ -29,6 +32,7 @@ const Header = ({ open, handleDrawerOpen }) => {
   const [errMessage, setErrMessage] = useState("");
   const [validSearch, setValidSearch] = useState(false);
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const [triggerSearch, { data: searchBooks, isFetching }] =
     useLazySearchBooksQuery();
@@ -88,14 +92,11 @@ const Header = ({ open, handleDrawerOpen }) => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+    backgroundColor: "background.default",
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
-    border: "1px solid #8B96A5",
+    border: "1px solid #8b96a5",
     display: "flex",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
@@ -134,7 +135,7 @@ const Header = ({ open, handleDrawerOpen }) => {
       position="fixed"
       open={open}
       sx={{
-        backgroundColor: "#fff",
+        bgcolor: "background.default",
         paddingY: "10px",
         paddingX: "30px",
         marginBottom: "70px",
@@ -158,15 +159,15 @@ const Header = ({ open, handleDrawerOpen }) => {
             <MenuIcon />
           </IconButton>
 
-          <ImageListItem sx={{ width: { xs: 110, sm: 130 } }}>
+          <ImageListItem sx={{ width: { xs: 100, sm: 110 } }}>
             <img
-              src={logo}
+              src={theme.palette.mode === "dark" ? whiteLogo : logo}
               alt={"Book shelf logo"}
               width={"110"}
               height={"53"}
               loading="lazy"
               style={{
-                width: { xs: "100px", sm: "130px" },
+                width: { xs: "100px", sm: "110px" },
                 marginRight: "50px",
               }}
             />
@@ -186,7 +187,6 @@ const Header = ({ open, handleDrawerOpen }) => {
                 aria-label="Search books from your book shelf"
                 sx={{
                   width: "100%",
-                  color: "#8b96a5",
                 }}
                 autoFocus
               />
@@ -263,6 +263,7 @@ const Header = ({ open, handleDrawerOpen }) => {
             >
               <AccountCircle />
             </IconButton>
+            <DarkMode marginLeft={2} />
           </Box>
         </Toolbar>
       </Container>
