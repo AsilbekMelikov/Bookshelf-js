@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import Sidebar from "./pages/Sidebar";
 import { Container } from "@mui/material";
 import UserAccount from "./pages/UserAccount";
+import Footer from "./components/Footer";
 
 const App = () => {
   const pathname = useLocation().pathname;
@@ -15,7 +16,7 @@ const App = () => {
       <main className={`${pathname === "/signup" ? "" : "main-body"}`}>
         <Container>
           <Routes>
-            <Route path="/" element={<Navigate to={"/signup"} replace />} />
+            <Route element={<Navigate to={"/signup"} replace />} />
             <Route index path="/signup" element={<Login />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/bookshelf" element={<Books />} />
@@ -23,6 +24,7 @@ const App = () => {
           </Routes>
         </Container>
       </main>
+      <Footer />
     </>
   );
 };
