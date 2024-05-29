@@ -16,7 +16,7 @@ const UserAccount = () => {
     <Box
       sx={{
         backgroundColor: "#fff",
-        padding: "80px",
+        padding: { xs: "30px", sm: 80 },
         boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
         borderRadius: "10px",
       }}
