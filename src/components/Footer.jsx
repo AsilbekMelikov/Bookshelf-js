@@ -101,15 +101,15 @@ const Footer = () => {
                   sx={
                     pathname === item.navigationPath
                       ? {
-                          color: "#fa7c54",
+                          color: "primary.main",
                           "& .MuiTypography-root": { cursor: "pointer" },
-                          "&:hover": { color: "#fa7c54" },
+                          "&:hover": { color: "primary.main" },
                         }
                       : {
                           color: "#fff",
 
                           "& .MuiTypography-root": { cursor: "pointer" },
-                          "&:hover": { color: "#fa7c54" },
+                          "&:hover": { color: "primary.main" },
                         }
                   }
                   primary={item.text}
@@ -129,7 +129,7 @@ const Footer = () => {
                   href={item.href}
                   target="_blank"
                   aria-label={item.ariaLabel}
-                  sx={{ color: "#fff", "&:hover": { color: "#fa7c54" } }}
+                  sx={{ color: "#fff", "&:hover": { color: "primary.main" } }}
                 >
                   {item.icon}
                 </IconButton>

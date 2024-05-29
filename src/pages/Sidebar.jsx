@@ -109,7 +109,7 @@ const Sidebar = () => {
                     <HomeIcon
                       sx={
                         pathname === text.path
-                          ? { color: "#fa7c54" }
+                          ? { color: "primary.main" }
                           : { color: "" }
                       }
                     />
@@ -118,7 +118,7 @@ const Sidebar = () => {
                     <LibraryBooksIcon
                       sx={
                         pathname === text.path
-                          ? { color: "#fa7c54" }
+                          ? { color: "primary.main" }
                           : { color: "" }
                       }
                     />
@@ -127,7 +127,7 @@ const Sidebar = () => {
                     <AccountCircleIcon
                       sx={
                         pathname === text.path
-                          ? { color: "#fa7c54" }
+                          ? { color: "primary.main" }
                           : { color: "" }
                       }
                     />
@@ -137,7 +137,7 @@ const Sidebar = () => {
                   primary={text.title}
                   sx={
                     pathname === text.path
-                      ? { color: "#fa7c54" }
+                      ? { color: "primary.main" }
                       : { color: "" }
                   }
                 />

@@ -144,7 +144,11 @@ const Header = ({ open, handleDrawerOpen }) => {
             onClick={handleDrawerOpen}
             size="large"
             edge="start"
-            sx={{ color: "#fa7c54", mr: 2, ...(open && { display: "none" }) }}
+            sx={{
+              color: "primary.main",
+              mr: 2,
+              ...(open && { display: "none" }),
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -184,13 +188,13 @@ const Header = ({ open, handleDrawerOpen }) => {
                 variant="contained"
                 size="small"
                 sx={{
-                  backgroundColor: "#fa7c54",
+                  backgroundColor: "primary.main",
                   color: "#fff",
                   paddingX: "20px",
                   width: "200px",
                   transitionDuration: "0.5s",
                   "&:hover": {
-                    backgroundColor: "#fa7c54",
+                    backgroundColor: "primary.main",
                     opacity: 0.8,
                   },
                 }}
@@ -203,7 +207,7 @@ const Header = ({ open, handleDrawerOpen }) => {
                         width: "25px",
                         height: "25px",
                         marginRight: "10px",
-                        color: "#fa7c54",
+                        color: "primary.main",
                       }}
                     />
                     Searching

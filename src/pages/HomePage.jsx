@@ -23,7 +23,7 @@ const HomePage = () => {
       variant="indeterminate"
       sx={{
         backgroundColor: "rgb(250, 124, 84, 0.3)",
-        "& .MuiLinearProgress-bar": { backgroundColor: "#fa7c54" },
+        "& .MuiLinearProgress-bar": { backgroundColor: "primary.main" },
       }}
     />
   ) : (

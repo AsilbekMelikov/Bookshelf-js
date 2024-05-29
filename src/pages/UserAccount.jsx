@@ -121,7 +121,7 @@ const UserAccount = () => {
           >
             <Avatar
               sx={{
-                bgcolor: "#fa7c54",
+                bgcolor: "primary.main",
                 width: "60px",
                 height: "60px",
                 marginRight: "18px",

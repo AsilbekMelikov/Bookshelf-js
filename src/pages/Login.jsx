@@ -293,7 +293,7 @@ const Login = () => {
                       width: "25px",
                       height: "25px",
                       marginRight: "10px",
-                      color: "#fa7c54",
+                      color: "primary.main",
                     }}
                   />
                   Processing

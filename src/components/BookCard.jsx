@@ -10,11 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import EditModal from "./EditModal";
 import StatusRadioButtons from "./StatusRadioButtons";
+import { useLocation } from "react-router-dom";
 
 const BookCard = ({ bookInfo, book }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showStatusRadioModal, setShowStatusRadioModal] = useState(false);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const pathname = useLocation().pathname;
 
   const changeStatusIntoString = (status) => {
     switch (status) {
@@ -48,12 +50,15 @@ const BookCard = ({ bookInfo, book }) => {
             color="inherit"
             sx={{ marginRight: "0px" }}
             onClick={() => {
-              setShowStatusRadioModal(false);
-              setShowEditModal(!showEditModal);
+              if (pathname === "/bookshelf") {
+                setShowStatusRadioModal(false);
+                setShowEditModal(!showEditModal);
+              }
             }}
           >
             <MoreIcon />
           </IconButton>
+
           <EditModal
             bookId={bookInfo?.id}
             showEditModal={showEditModal}
@@ -116,11 +121,11 @@ const BookCard = ({ bookInfo, book }) => {
           <Button
             size="small"
             sx={{
-              backgroundColor: "#fa7c54",
+              backgroundColor: "primary.main",
               color: "#fff",
               paddingX: "10px",
               "&:hover": {
-                backgroundColor: "#fa7c54",
+                backgroundColor: "primary.main",
                 opacity: 0.8,
               },
             }}

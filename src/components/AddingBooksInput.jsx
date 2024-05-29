@@ -15,6 +15,7 @@ const AddingBooksInput = ({ refetch }) => {
 
   const [addBook, { isLoading }] = useAddBookMutation();
 
+  // ADD BOOK FUNCTION
   const handleAddBook = async () => {
     try {
       await addBook(addingBookInput).unwrap();
@@ -66,11 +67,11 @@ const AddingBooksInput = ({ refetch }) => {
             onClick={handleAddBook}
             sx={{
               width: "180px",
-              backgroundColor: "#fa7c54",
+              backgroundColor: "primary.main",
               color: "#fff",
               paddingX: "10px",
               "&:hover": {
-                backgroundColor: "#fa7c54",
+                backgroundColor: "primary.main",
                 opacity: 0.8,
               },
             }}
