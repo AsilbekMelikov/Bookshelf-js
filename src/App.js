@@ -16,7 +16,7 @@ const App = () => {
       <main className={`${pathname === "/signup" ? "" : "main-body"}`}>
         <Container>
           <Routes>
-            <Route element={<Navigate to={"/signup"} replace />} />
+            <Route path="/" element={<Navigate to={"/signup"} replace />} />
             <Route index path="/signup" element={<Login />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/bookshelf" element={<Books />} />
@@ -24,7 +24,7 @@ const App = () => {
           </Routes>
         </Container>
       </main>
-      <Footer />
+      {pathname === "/signup" ? "" : <Footer />}
     </>
   );
 };
