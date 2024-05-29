@@ -47,7 +47,7 @@ const StatusRadioButtons = ({
         position: "absolute",
         top: "35px",
         left: "-110px",
-        backgroundColor: "#fff",
+        bgcolor: "background.default",
         boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
         padding: "10px",
       }}

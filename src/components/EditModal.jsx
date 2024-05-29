@@ -30,7 +30,7 @@ const EditModal = (props) => {
               top: "40px",
               left: "-120px",
               display: "block",
-              backgroundColor: "#fff",
+              bgcolor: "background.default",
               boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
               borderRadius: "6px",
               paddingX: "10px",
