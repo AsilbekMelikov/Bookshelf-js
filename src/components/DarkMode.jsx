@@ -14,7 +14,10 @@ const DarkMode = ({ marginLeft }) => {
   return (
     <IconButton
       sx={{ ml: marginLeft }}
-      onClick={colorMode.toggleColorMode}
+      onClick={(e) => {
+        e.stopPropagation();
+        colorMode.toggleColorMode();
+      }}
       color="inherit"
     >
       {theme.palette.mode === "dark" ? (
