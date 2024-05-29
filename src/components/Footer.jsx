@@ -92,8 +92,9 @@ const Footer = () => {
               marginLeft: "auto",
             }}
           >
-            {footerTextData.map((item) => (
+            {footerTextData.map((item, index) => (
               <ListItemButton
+                key={index}
                 onClick={() => navigate(item.navigationPath)}
                 sx={{ flexGrow: "0", cursor: "default" }}
               >
@@ -123,8 +124,8 @@ const Footer = () => {
               marginLeft: "auto",
             }}
           >
-            {footerIconsData.map((item) => (
-              <ListItemIcon sx={{ flexGrow: "0" }}>
+            {footerIconsData.map((item, index) => (
+              <ListItemIcon key={index} sx={{ flexGrow: "0" }}>
                 <IconButton
                   href={item.href}
                   target="_blank"

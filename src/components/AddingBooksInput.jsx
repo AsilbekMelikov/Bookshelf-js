@@ -6,14 +6,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAddBookMutation } from "../features/authApiSlice";
 
 const AddingBooksInput = ({ refetch }) => {
   const [addingBookInput, setAddingBookInput] = useState("");
+  const [validBookInput, setValidBookInput] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
   const [addBook, { isLoading }] = useAddBookMutation();
+
+  useEffect(() => {
+    if (addingBookInput.length < 3) {
+      setValidBookInput(false);
+    } else {
+      setValidBookInput(true);
+    }
+  }, [addingBookInput]);
 
   // ADD BOOK FUNCTION
   const handleAddBook = async () => {
@@ -65,6 +74,8 @@ const AddingBooksInput = ({ refetch }) => {
 
           <Button
             onClick={handleAddBook}
+            variant="contained"
+            disabled={!validBookInput || isLoading}
             sx={{
               width: "180px",
               backgroundColor: "primary.main",
