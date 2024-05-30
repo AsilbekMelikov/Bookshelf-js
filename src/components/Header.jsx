@@ -230,7 +230,6 @@ const Header = ({ open, handleDrawerOpen }) => {
           )}
           <Box
             sx={{
-              display: { xs: "none", md: "flex" },
               marginLeft: "auto",
             }}
           >
@@ -238,6 +237,7 @@ const Header = ({ open, handleDrawerOpen }) => {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              sx={{ display: { xs: "none", md: "inline-block" } }}
             >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
