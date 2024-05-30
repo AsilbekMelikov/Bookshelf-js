@@ -11,21 +11,24 @@ import Footer from "./components/Footer";
 const App = () => {
   const pathname = useLocation().pathname;
 
-  return (
+  return pathname === "/signup" ? (
+    <Routes>
+      <Route path="/" element={<Navigate to={"/signup"} replace />} />
+      <Route index path="/signup" element={<Login />} />
+    </Routes>
+  ) : (
     <>
-      {pathname === "/signup" ? "" : <Sidebar />}
+      <Sidebar />
       <main className={`${pathname === "/signup" ? "" : "main-body"}`}>
         <Container>
           <Routes>
-            <Route path="/" element={<Navigate to={"/signup"} replace />} />
-            <Route index path="/signup" element={<Login />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/bookshelf" element={<Books />} />
             <Route path="/account" element={<UserAccount />} />
           </Routes>
         </Container>
       </main>
-      {pathname === "/signup" ? "" : <Footer />}
+      <Footer />
     </>
   );
 };
