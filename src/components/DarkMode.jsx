@@ -8,12 +8,12 @@ export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
-const DarkMode = ({ marginLeft }) => {
+const DarkMode = ({ marginLeft, alignSelfRight }) => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   return (
     <IconButton
-      sx={{ ml: marginLeft }}
+      sx={{ ml: marginLeft, alignSelf: alignSelfRight }}
       onClick={(e) => {
         e.stopPropagation();
         colorMode.toggleColorMode();
