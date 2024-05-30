@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ThemeProvider } from "@emotion/react";
 import {
   Box,
   Button,
@@ -9,13 +8,15 @@ import {
   ImageListItem,
   TextField,
   Typography,
-  createTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../features/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/authSlice";
 import logo from "../assets/icons/Logo 1.svg";
+import whiteLogo from "../assets/icons/white-logo.png";
+import DarkMode from "../components/DarkMode";
+import { useTheme } from "@emotion/react";
 
 const Login = () => {
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,6 +44,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   // EMAIL VALIDATION
   useEffect(() => {
@@ -114,15 +116,8 @@ const Login = () => {
     }
   };
 
-  const defaultTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#fa7c54",
-      },
-    },
-  });
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
       <Container
         sx={{
           display: "flex",
@@ -134,6 +129,7 @@ const Login = () => {
         <CssBaseline />
         <Box
           sx={{
+            bgcolor: theme.palette.mode === "dark" ? "#262626" : "#fff",
             marginTop: "50px",
             display: "flex",
             flexDirection: "column",
@@ -146,9 +142,10 @@ const Login = () => {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
           }}
         >
+          <DarkMode alignSelfRight={"flex-end"} />
           <ImageListItem>
             <img
-              src={logo}
+              src={theme.palette.mode === "dark" ? whiteLogo : logo}
               alt={"Book shelf logo"}
               width={140}
               height={80}
@@ -305,7 +302,7 @@ const Login = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 };
 

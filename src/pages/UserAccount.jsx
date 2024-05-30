@@ -8,14 +8,16 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useGetLoginDataQuery } from "../features/authApiSlice";
+import { useTheme } from "@emotion/react";
 
 const UserAccount = () => {
   const { data: loginData, isLoading } = useGetLoginDataQuery();
+  const theme = useTheme();
 
   return (
     <Box
       sx={{
-        // backgroundColor: "#fff",
+        backgroundColor: theme.palette.mode === "dark" ? "#262626" : "",
         padding: { xs: "30px", sm: "80px" },
         boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
         borderRadius: "10px",
@@ -38,81 +40,31 @@ const UserAccount = () => {
             </Box>
           </Box>
           <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
-            <Grid item xs={6} sx={{ paddingY: "25px" }}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-          </Grid>
-          <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
-            <Grid item xs={6} sx={{ paddingY: "25px" }}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-          </Grid>
-          <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
-            <Grid item xs={6} sx={{ paddingY: "25px" }}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-          </Grid>
-          <Divider sx={{ marginBottom: "25px" }} />
-          <Grid container spacing={3}>
-            <Grid item xs={6} sx={{ paddingY: "25px" }}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Skeleton
-                variant="text"
-                width={400}
-                height={25}
-                sx={{ fontSize: "1rem" }}
-              />
-            </Grid>
-          </Grid>
+          {[1, 2, 3, 4].map((_, index) => {
+            return (
+              <>
+                <Grid key={index} container spacing={3}>
+                  <Grid item xs={6} sx={{ paddingY: "25px" }}>
+                    <Skeleton
+                      variant="text"
+                      width={400}
+                      height={25}
+                      sx={{ fontSize: "1rem" }}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Skeleton
+                      variant="text"
+                      width={400}
+                      height={25}
+                      sx={{ fontSize: "1rem" }}
+                    />
+                  </Grid>
+                </Grid>
+                <Divider sx={{ marginBottom: "25px" }} />
+              </>
+            );
+          })}
         </>
       ) : (
         <>
