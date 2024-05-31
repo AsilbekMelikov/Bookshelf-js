@@ -27,7 +27,7 @@ import { useTheme } from "@emotion/react";
 import whiteLogo from "../assets/icons/white-logo.png";
 
 const Header = ({ open, handleDrawerOpen }) => {
-  const SEARCH_REGEX = /^[a-zA-Z ][a-zA-Z0-9-_ ]{2,40}$/;
+  const SEARCH_REGEX = /^[0-9a-zA-Z ][a-zA-Z0-9-_ ]{2,40}$/;
   const [searchInput, setSearchInput] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const [validSearch, setValidSearch] = useState(false);
@@ -60,6 +60,9 @@ const Header = ({ open, handleDrawerOpen }) => {
   useEffect(() => {
     dispatch(setSearchLoading(isFetching));
 
+    if (!isFetching) {
+      setSearchInput("");
+    }
     // eslint-disable-next-line
   }, [isFetching]);
 
@@ -69,6 +72,18 @@ const Header = ({ open, handleDrawerOpen }) => {
 
     // eslint-disable-next-line
   }, [searchInput]);
+
+  const handleClick = () => {
+    triggerSearch(searchInput);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      // Prevent default behavior if necessary
+      e.preventDefault();
+      triggerSearch(searchInput);
+    }
+  };
 
   const drawerWidth = 240;
 
@@ -93,12 +108,14 @@ const Header = ({ open, handleDrawerOpen }) => {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: "background.default",
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
+    marginLeft: theme.spacing(2),
     width: "100%",
     border: "1px solid #8b96a5",
     display: "flex",
     [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+    },
+    [theme.breakpoints.up("md")]: {
       marginLeft: theme.spacing(3),
       width: "50%",
     },
@@ -125,11 +142,6 @@ const Header = ({ open, handleDrawerOpen }) => {
     },
   }));
 
-  const handleClick = () => {
-    triggerSearch(searchInput);
-    setSearchInput("");
-  };
-
   return (
     <AppBar
       position="fixed"
@@ -137,13 +149,18 @@ const Header = ({ open, handleDrawerOpen }) => {
       sx={{
         bgcolor: "background.default",
         paddingY: "10px",
-        paddingX: "30px",
+        // paddingX: { xs: "10px", sm: "30px" },
         marginBottom: "70px",
         display: "flex",
       }}
     >
       <Container>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            justifyContent: { sm: "flex-start", md: "space-between" },
+            paddingX: { xs: 0, sm: "10px" },
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -168,12 +185,12 @@ const Header = ({ open, handleDrawerOpen }) => {
               loading="lazy"
               style={{
                 width: { xs: "100px", sm: "110px" },
-                marginRight: "50px",
+                marginRight: { xs: "20px", sm: "30px" },
               }}
             />
           </ImageListItem>
           {pathname === "/home" ? (
-            <Search sx={{ display: { xs: "none", md: "flex" } }}>
+            <Search>
               <SearchIconWrapper>
                 <SearchIcon sx={{ color: "#8b96a5" }} />
               </SearchIconWrapper>
@@ -184,6 +201,7 @@ const Header = ({ open, handleDrawerOpen }) => {
                 inputProps={{ "aria-label": "search" }}
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={handleKeyPress}
                 aria-label="Search books from your book shelf"
                 sx={{
                   width: "100%",
@@ -196,9 +214,10 @@ const Header = ({ open, handleDrawerOpen }) => {
                 variant="contained"
                 size="small"
                 sx={{
+                  display: { xs: "none", sm: "flex" },
                   backgroundColor: "primary.main",
                   color: "#fff",
-                  paddingX: "20px",
+                  paddingX: "10px",
                   width: "200px",
                   transitionDuration: "0.5s",
                   "&:hover": {
@@ -211,9 +230,10 @@ const Header = ({ open, handleDrawerOpen }) => {
                 {isFetching ? (
                   <>
                     <CircularProgress
+                      size={"small"}
                       style={{
-                        width: "25px",
-                        height: "25px",
+                        width: "22px",
+                        height: "22px",
                         marginRight: "10px",
                         color: "primary.main",
                       }}
@@ -221,7 +241,7 @@ const Header = ({ open, handleDrawerOpen }) => {
                     Searching
                   </>
                 ) : (
-                  "Search books"
+                  "Search"
                 )}
               </Button>
             </Search>
@@ -230,14 +250,13 @@ const Header = ({ open, handleDrawerOpen }) => {
           )}
           <Box
             sx={{
-              marginLeft: "auto",
+              display: { xs: "none", md: "inline-block" },
             }}
           >
             <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
-              sx={{ display: { xs: "none", md: "inline-block" } }}
             >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
